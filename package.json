@@ -4,7 +4,7 @@
   "dependencies": {
     "ejs": "2.6.1",
     "express": "4.16.3",
-    "http-proxy": "1.17",
+    "http-proxy": "1.18",
     "serve-static": "1.13.2",
     "@bower_components/bootstrap": "twbs/bootstrap#3.4.1",
     "@bower_components/ammap3": "amcharts/ammap3#3.17.1",
