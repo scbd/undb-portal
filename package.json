@@ -2,7 +2,7 @@
   "name": "undb-portal",
   "description": "United Nations Decade on Biodiversity",
   "dependencies": {
-    "ejs": "2.6.1",
+    "ejs": "3.1.7",
     "express": "4.16.3",
     "http-proxy": "^1.18.1",
     "serve-static": "1.13.2",
