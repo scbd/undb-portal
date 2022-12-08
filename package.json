@@ -3,7 +3,7 @@
   "description": "United Nations Decade on Biodiversity",
   "dependencies": {
     "ejs": "2.6.1",
-    "express": "4.16.3",
+    "express": "4.17.3",
     "http-proxy": "^1.18.1",
     "serve-static": "1.13.2",
     "@bower_components/bootstrap": "twbs/bootstrap#3.4.1",
