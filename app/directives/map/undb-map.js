@@ -39,7 +39,7 @@ define(['text!./undb-map.html',
                     $scope.countries = $filter('orderBy')(o.data, 'title|lstring');
                     $http.get("/api/v2013/index", {
                         params: {
-                            'q': 'schema_s:nationalAssessment',
+                            'q': 'schema_s:nationalAssessment AND realm_ss:' + realm.replace('UNDB', 'CHM'),
                             'sort': 'createdDate_dt desc',
                             'fl':'nationalTarget_EN_t,progress_EN_s,government_s,identifier_s,country_s,title_s, description_s,lat_d,lng_d',
                             'wt': 'json',

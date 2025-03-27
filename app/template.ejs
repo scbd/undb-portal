@@ -6,7 +6,13 @@
     <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments) }; gtag("js", new Date()); gtag("set", "developer_id.dMDhkMT", true); gtag("config", "G-7S1TPRE7F5", { "groups": "default", "page_placeholder": "PLACEHOLDER_page_location", "allow_ad_personalization_signals": false });</script>
 
     <script src="https://cdn.slaask.com/chat.js"></script>
+    
     <script>
+        window.scbdApp = {
+            host             : '<%=clearingHouseHost%>',
+            apiUrl           : '<%=apiUrl%>',
+            accountsUrl      : '<%=accountsUrl%>'       
+        } 
         //patch slaask to works with requireJS
         window._slaask.createScriptTag = function (url) {
             var t = {};

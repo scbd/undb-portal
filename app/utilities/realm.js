@@ -1,13 +1,10 @@
-define(['app', 'angular'], function (app, angular) { 'use strict';
+define(['app', 'angular', 'realmConf'], function (app, angular, realmConf) { 'use strict';
 
     app.provider("realm", {
 
         $get : ["$location", function($location) {
 
-            if($location.$$host!= "www.cbd.int"){
-                return 'CHM-DEV';
-            }
-            return 'CHM';
+            return realmConf.realm;
         }]
     });
 

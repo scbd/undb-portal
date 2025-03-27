@@ -30,7 +30,8 @@ require.config({
         'ngDialog'                  : cdnHost + 'ng-dialog@0.6.2/js/ngDialog.min',
         'ngInfiniteScroll'          : cdnHost + 'ng-infinite-scroll@1.3.0/build/ng-infinite-scroll.min',
         'angular-flex'              : 'libs/angular-flex/angular-flex',
-        'eonasdan-bootstrap-datetimepicker' : cdnHost + 'eonasdan-bootstrap-datetimepicker@4.17.47/build/js/bootstrap-datetimepicker.min'
+        'eonasdan-bootstrap-datetimepicker' : cdnHost + 'eonasdan-bootstrap-datetimepicker@4.17.47/build/js/bootstrap-datetimepicker.min',
+        'json'                      : cdnHost + 'requirejs-plugins@1.0.2/src/json',
     },
     shim: {
       'angular'              : { deps : ['jquery'], exports: 'angular' },
@@ -57,7 +58,12 @@ require.config({
 if (!require.defined('_slaask'))
     define("_slaask", window._slaask);
 
-require(['angular', 'app', 'bootstrap', 'authentication', 'routes', 'template'], function(ng, app) {
+
+define('realmConf', [`json!/api/v2018/realm-configurations/${encodeURIComponent(window?.scbdApp?.host||'')}`], function(realmConf){
+  return realmConf[0];
+})
+
+require(['angular', 'app', 'bootstrap', 'authentication','realmConf', 'routes', 'template'], function(ng, app) {
     ng.element(document).ready(function () {
          ng.bootstrap(document, [app.name]);
     });

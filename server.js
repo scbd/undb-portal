@@ -32,7 +32,11 @@ appRoutes.use('/app',           express.static(__dirname + '/app',              
 appRoutes.use('/app/libs',      express.static(__dirname + '/node_modules/@bower_components', { setHeaders: setCustomCacheControl }));
 appRoutes.get('/*',             (req, res) => { 
   const baseUrl = toBasePath(basePath || req.headers.base_url);
-  res.render('template', { baseUrl: urlSafe(baseUrl), gitVersion: gitVersion })
+  const clearingHouseHost  = process.env.CLEARINGHOUSE_HOST;
+  const apiUrl             = process.env.API_URL || 'https://api.cbddev.xyz';
+  const accountsUrl        = process.env.ACCOUNTS_URL || 'https://accounts.cbddev.xyz';
+
+  res.render('template', { baseUrl: urlSafe(baseUrl), gitVersion: gitVersion, clearingHouseHost,apiUrl, accountsUrl })
 });
 
 // START SERVER
