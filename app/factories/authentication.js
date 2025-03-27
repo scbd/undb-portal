@@ -2,16 +2,7 @@
 
 define(['app', 'angular', 'jquery'], function (app, ng, $) { 'use strict';
 
-    var accountsBaseUrl = (function(){
-
-        var domain = window.location.hostname.replace(/[^\.]+\./, '');
-
-        if(domain=='localhost')
-            domain = 'cbddev.xyz';
-
-        return 'https://accounts.'+domain;
-
-    })();
+    var accountsBaseUrl = window.scbdApp.accountsUrl;
 
 	app.factory('apiToken', ["$q", "$rootScope", "$window", "$document", "$timeout", function($q, $rootScope, $window, $document, $timeout) {
 
@@ -285,6 +276,7 @@ define(['app', 'angular', 'jquery'], function (app, ng, $) { 'use strict';
 			request: function(config) {
 
 				var trusted = /^https:\/\/api.cbd.int\//i.test(config.url) ||
+							  /^https:\/\/api.cbddev.xyz\//i.test(config.url) ||
 							  /^\/api\//i                .test(config.url);
 
 				var hasAuthorization = (config.headers||{}).hasOwnProperty('Authorization') ||
@@ -318,6 +310,7 @@ define(['app', 'angular', 'jquery'], function (app, ng, $) { 'use strict';
 					return config;
 
                 var trusted = /^https:\/\/api.cbd.int\//i .test(config.url) ||
+							  /^https:\/\/api.cbddev.xyz\//i.test(config.url) ||
                               /^https:\/\/localhost[:\/]/i.test(config.url) ||
                               /^\/\w+/i                   .test(config.url);
 
@@ -343,7 +336,7 @@ define(['app', 'angular', 'jquery'], function (app, ng, $) { 'use strict';
 							var rewrite = /^\/api\//.test(config.url.toLowerCase());
 
 							if(rewrite)
-									config.url = 'https://api.cbd.int' + config.url;
+									config.url = window.scbdApp.apiUrl + config.url;
 
 							return config;
 					}

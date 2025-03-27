@@ -53,7 +53,7 @@ define(['app', 'lodash', 'moment-timezone', 'providers/locale', 'factories/dev-r
         function countries() {
 
             if (!localStorage.getItem('countries'))
-                return $http.get("https://api.cbd.int/api/v2015/countries", {
+                return $http.get(window.scbdApp.apiUrl+"/api/v2015/countries", {
                     cache: true
                 }).then(function(o) {
                     var countries = $filter("orderBy")(o.data, "name.en");

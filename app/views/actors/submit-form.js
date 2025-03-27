@@ -92,8 +92,8 @@ define(['lodash', 'guid', 'app', 'directives/file', 'utilities/workflows', 'util
                 $scope.documentInfo = docInfo;
 
                 return docInfo.workingDocumentID ?
-                       $http.get("https://api.cbd.int/api/v2013/documents/"+uid+"/versions/draft").then(res_Data) :
-                       $http.get("https://api.cbd.int/api/v2013/documents/"+uid).then(res_Data);
+                       $http.get(window.scbdApp.apiUrl+"/api/v2013/documents/"+uid+"/versions/draft").then(res_Data) :
+                       $http.get(window.scbdApp.apiUrl+"/api/v2013/documents/"+uid).then(res_Data);
 
             }).then(function(doc){
 
@@ -137,7 +137,7 @@ define(['lodash', 'guid', 'app', 'directives/file', 'utilities/workflows', 'util
                 return value==="" || value===undefined || value===null;
             });
 
-            return $http.put('https://api.cbd.int/api/v2013/documents/validate', doc, { params : { schema : doc.header.schema }}).then(function(res) {
+            return $http.put(window.scbdApp.apiUrl+'/api/v2013/documents/validate', doc, { params : { schema : doc.header.schema }}).then(function(res) {
 
                 var report = res.data;
 
@@ -147,7 +147,7 @@ define(['lodash', 'guid', 'app', 'directives/file', 'utilities/workflows', 'util
             }).then(function() {
 
                 if($scope.editWorkflow){
-                    // $http.put('https://api.cbd.int/api/v2013/documents/'+doc.header.identifier+'/versions/draft', doc, { params : { schema : doc.header.schema }});
+                    // $http.put(window.scbdApp.apiUrl+'/api/v2013/documents/'+doc.header.identifier+'/versions/draft', doc, { params : { schema : doc.header.schema }});
 
                     return storage.drafts.locks.get(doc.header.identifier,{lockID:''})
                             .then(function(lockInfo){
@@ -161,7 +161,7 @@ define(['lodash', 'guid', 'app', 'directives/file', 'utilities/workflows', 'util
                             });
                 }
                 else
-                    return $http.put('https://api.cbd.int/api/v2013/documents/'+doc.header.identifier+'/versions/draft', doc, { params : { schema : doc.header.schema }});
+                    return $http.put(window.scbdApp.apiUrl+'/api/v2013/documents/'+doc.header.identifier+'/versions/draft', doc, { params : { schema : doc.header.schema }});
 
             }).then(function(res) {
                 $scope.$emit('showInfo', 'Actor successfully saved.');
@@ -204,13 +204,13 @@ define(['lodash', 'guid', 'app', 'directives/file', 'utilities/workflows', 'util
                 if(file.size>1024*500)          throw { code : "fileSize" };
 
                 var uid  = $scope.document.header.identifier;
-                var url  = 'https://api.cbd.int/api/v2013/documents/'+uid+'/attachments/'+encodeURIComponent(file.name);
+                var url  = window.scbdApp.apiUrl+'/api/v2013/documents/'+uid+'/attachments/'+encodeURIComponent(file.name);
 
                 return $http.put(url, file, { headers : { "Content-Type": file.type } }).then(res_Data);
 
             }).then(function(attachInfo) {
 
-                $scope.document.logo  = 'https://chm.cbd.int/api/v2013/documents/'+attachInfo.documentUID+'/attachments/'+encodeURIComponent(attachInfo.filename);
+                $scope.document.logo  = window.scbdApp.apiUrl+'/api/v2013/documents/'+attachInfo.documentUID+'/attachments/'+encodeURIComponent(attachInfo.filename);
 
             }).catch(res_Error).finally(function() {
 

@@ -5,7 +5,7 @@ define(['app','lodash','directives/activities-list'], function(app,_) { 'use str
 
     $scope.loading=true;
 
-		$http.get('https://api.cbd.int/api/v2015/countries', { cache:true, params: { f : { code : 1, name : 1 } } }).then(function(res) {
+		$http.get(window.scbdApp.apiUrl+'/api/v2015/countries', { cache:true, params: { f : { code : 1, name : 1 } } }).then(function(res) {
 
 				res.data.forEach(function(c) {
 						c.code = c.code.toLowerCase();

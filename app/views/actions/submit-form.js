@@ -137,7 +137,7 @@ define(['lodash', 'jquery', 'guid', 'app', 'directives/file','directives/date-he
                 return value==="" || value===undefined || value===null;
             });
 
-            return $http.put('https://api.cbd.int/api/v2013/documents/validate', doc, { params : { schema : doc.header.schema }})
+            return $http.put(window.scbdApp.apiUrl+'/api/v2013/documents/validate', doc, { params : { schema : doc.header.schema }})
             .then(res_Data).then(function(report) {
 
                 if(report.errors && report.errors.length)
@@ -155,7 +155,7 @@ define(['lodash', 'jquery', 'guid', 'app', 'directives/file','directives/date-he
                             });
                 }
                 else
-                    return $http.put('https://api.cbd.int/api/v2013/documents/'+doc.header.identifier+'/versions/draft', doc, { params : { schema : doc.header.schema }}).then(res_Data);
+                    return $http.put(window.scbdApp.apiUrl+'/api/v2013/documents/'+doc.header.identifier+'/versions/draft', doc, { params : { schema : doc.header.schema }}).then(res_Data);
 
             }).then(function(docInfo) {
                 $scope.$emit('showInfo', 'Action successfully saved.');
@@ -198,7 +198,7 @@ define(['lodash', 'jquery', 'guid', 'app', 'directives/file','directives/date-he
                 if(file.size>1024*500)          throw { code : "fileSize" };
 
                 var uid  = $scope.document.header.identifier;
-                var url  = 'https://api.cbd.int/api/v2013/documents/'+uid+'/attachments/'+encodeURIComponent(file.name);
+                var url  = window.scbdApp.apiUrl+'/api/v2013/documents/'+uid+'/attachments/'+encodeURIComponent(file.name);
 
                 return $http.put(url, file, { headers : { "Content-Type": file.type } }).then(res_Data);
 

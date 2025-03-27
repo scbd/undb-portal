@@ -31,7 +31,7 @@ define(['lodash', 'guid','text!./email.txt', 'app','factories/mongo-storage', 'd
 
 
 
-                return $http.get('https://api.cbd.int/api/v2013/users/' + user.userID).then(function onsuccess(response) {
+                return $http.get(window.scbdApp.apiUrl + '/api/v2013/users/' + user.userID).then(function onsuccess(response) {
                     if (!$scope.document) $scope.document= {};
                     $scope.document.email = _.clone(response.data.Email);
                     var c = _.find($scope.countries,{code:response.data.Country});

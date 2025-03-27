@@ -29,7 +29,7 @@ define(['app', 'lodash', 'directives/edit-link', 'directives/link-list','ng-cked
             //
             //=======================================================================
             function load() {
-                return $http.get('https://api.cbd.int/api/v2013/countries/' + $scope.code.toUpperCase(), {
+                return $http.get(window.scbdApp.apiUrl+'/api/v2013/countries/' + $scope.code.toUpperCase(), {
                     cache: true,
                 }).then(function(res) {
                     delete(res.data._id);
@@ -43,7 +43,7 @@ define(['app', 'lodash', 'directives/edit-link', 'directives/link-list','ng-cked
 
                     $scope.document.code = $scope.document.code.toLowerCase();
 
-                    $http.get('https://api.cbd.int/api/v2016/undb-party-profiles/', {
+                    $http.get(window.scbdApp.apiUrl+'/api/v2016/undb-party-profiles/', {
                         'params': {
                             q: {
                                 'code': $scope.document.code

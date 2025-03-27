@@ -7,7 +7,7 @@ define(['app','lodash'], function(app,_) { 'use strict';
 		//
 		//=======================================================================
 		$scope.isLoading=true;
-		$http.get('https://api.cbd.int/api/v2015/countries', {
+		$http.get(window.scbdApp.apiUrl+'/api/v2015/countries', {
 			cache: true,
 			params: {
 				f: {
@@ -22,7 +22,7 @@ define(['app','lodash'], function(app,_) { 'use strict';
 				c.name = c.name[locale];
 				c.cssClass='flag-icon-'+c.code;
 			});
-			$http.get("https://api.cbd.int/api/v2013/index", {
+			$http.get(window.scbdApp.apiUrl+"/api/v2013/index", {
 					 params: {
 							 'q': 'schema_s:undbActor ',
 							 'sort': 'createdDate_dt desc, title_t asc',
